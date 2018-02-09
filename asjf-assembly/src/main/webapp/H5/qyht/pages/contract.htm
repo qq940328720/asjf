@@ -1,0 +1,378 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>签订贷款合同</title>
+    <meta content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta content="fullscreen=yes,preventMove=no" name="ML-Config">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no; email=no"/>
+    <style>
+        body {
+            font-family: '微软雅黑'
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .blank {
+            height: 8px;
+            overflow: hidden;
+        }
+
+        #main {
+        }
+
+        #main .title {
+            font-size: 1rem;
+            background: #eeeff0;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+        }
+
+        #main .page-list {
+        }
+
+        #main .page-list li {
+            height: 44px;
+            line-height: 44px;
+            border-bottom: 1px solid #eeeff0;
+            list-style: none;
+        }
+
+        #main .page-list li label {
+            width: 25%;
+            float: left;
+            text-align: right;
+        }
+
+        #main .page-list li input {
+            margin-left: 5%;
+            height: 30px;
+            line-height: 30px;
+            width: 65%;
+            border: none;
+        }
+
+        #main .page-list li input.short {
+            width: 30%;
+        }
+
+        #main .page-list li .message {
+            background: #1379d8;
+            width: 90px;
+            height: 30px;
+            line-height: 30px;
+            color: #fff;
+            border-radius: 5px;
+            border: none;
+        }
+
+        #main .agree {
+            width: 90%;
+            margin: 0 auto;
+            font-size: .9rem;
+            clear: both;
+            padding-top: 10px;
+            overflow: hidden;
+        }
+
+        #main .agree .left {
+            float: left;
+            width: 10%;
+        }
+
+        #main .agree .left input {
+            position: relative;
+            left: 10px;
+            top: 2px;
+        }
+
+        #main .agree .right {
+            float: left;
+            width: 85%;
+            font-size: .9rem;
+        }
+
+        #main .agree .right a {
+            font-size: .9rem;
+            color: #1379d8;
+            text-decoration: none;
+        }
+
+        #main .button {
+        }
+
+        #main .submit {
+            width: 90%;
+            margin: 0px auto;
+               margin-top: 22px;
+            display: block;
+            background: #1379d8;
+            font-size: 1rem;
+            text-align: center;
+            line-height: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .box {
+            position: fixed;
+            left: 10%;
+            top: 10%;
+            width: 70%;
+            height: 70%;
+            border: 1px solid #dedede;
+            background: #fff;
+            border-radius: 5px;
+            font-size: .9rem;
+            line-height: 150%;
+            padding: 5%;
+            color: #444;
+        }
+
+        .box .close {
+            width: 90%;
+            margin: 0px auto;
+            display: block;
+            background: #1379d8;
+            font-size: .8rem;
+            text-align: center;
+            line-height: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .box .text {
+            height: 91%;
+            overflow: auto;
+            padding: 15px 0px;
+        }
+		.box .text_disclosure {
+            height: 91%;
+            overflow: auto;
+        }
+        .none {
+            display: none;
+        }
+
+        .box2{
+            z-index:1;
+            position:fixed;
+            width:60%;
+            height:30px;
+            line-height: 30px;
+            padding:10px;
+            top:40%;
+            left:20%;
+            right:20%;
+            text-align: center;
+            background: #fff;
+        }
+        .mask{
+            z-index:0;
+            position:fixed;
+            left:0;
+            top:0;
+            width:100%;
+            height:100%;
+            background: #000;
+            opacity: .8;
+        }
+    </style>
+</head>
+
+<body>
+<div id="main">
+    <div class="title">签订贷款合同</div>
+    <input id="ctx" value="" type="hidden"/>
+    <ul class="page-list">
+        <li>
+            <label for="borrower">借款人</label>
+            <input name="borrower" id="borrower" type="text" value="马阿卜都" readonly="readonly"/>
+        </li>
+        <li>
+            <label for="IDcard">身份证</label>
+            <input type="text" name="IDcard" id="IDcard" value="622926199501091053" readonly="readonly"/>
+        </li>
+        <li>
+            <label for="phoneNumber">手机号码</label>
+            <input type="text"  name="phoneNumber" id="phoneNumber" value="13088734456" readonly="readonly"/>
+        </li>
+        <li>
+            <label for="identifyCode">验证码</label>
+            <input class="short"  name="identifyCode" id="identifyCode" type="text" id="sms_code" readonly="readonly"/>
+            <button class="message" onclick="sendSMS(this);" id="send_sms">发送验证码</button>
+        </li>
+    </ul>
+    <div class="agree">
+    	<!--<div class="left"><input type="checkbox" checked="checked"></div>-->
+        <!--<div class="right">请仔细阅读以下-->
+            <!--<a class="show-box06" href="javascript:void(0)">《贷款人披露信息》</a>-->
+        <!--</div>-->
+        <div class="left"><input type="checkbox" checked="checked"></div>
+        <div class="right">我同意签署
+            <a class="show-box01" href="javascript:void(0)">《借款合同》、</a>
+            <!--<a class="show-box02" href="javascript:void(0)">《银联代扣委托书》、</a>-->
+            <a class="show-box03" href="javascript:void(0)">《个人贷款申请》、</a>
+            <a class="show-box04" href="javascript:void(0)">《个人信用报告查询与上报授权书》、</a>
+            <a class="show-box05" href="javascript:void(0)">《信用信息查询和使用授权函》</a>
+        </div>
+    </div>
+    <button class="submit" type="button" onclick="submit_Sign('confirmSign',this);" id="config_sign">确认签署</button>
+</div>
+<div class="box b1 none">
+    <div class="text" id="loan_contract">
+
+    </div>
+    <button class="close" type="button">关闭</button>
+</div>
+<div class="box b2 none">
+    <div class="text" id="unionpay_auth"></div>
+    <button class="close" type="button">关闭</button>
+</div>
+<div class="box b3 none">
+    <div class="text" id="account_info"></div>
+    <button class="close" type="button">关闭</button>
+</div>
+<div class="box b4 none">
+    <div class="text" id="credit_report">
+    </div>
+    <button class="close" type="button">关闭</button>
+</div>
+<div class="box b5 none">
+    <div class="text" id="credit_auth">
+    </div>
+    <button class="close" type="button">关闭</button>
+</div>
+<div class="box b6 none">
+    <div class="text_disclosure" id="disclosure">
+
+
+        <meta charset="UTF-8">
+        <title>信用贷款_个人信用贷款_网上贷款_安全贷款-小雨点网贷</title>
+        <meta name="Keywords" content="信用贷款,个人信用贷款,网上贷款,安全贷款">
+        <meta content="width=device-width, initial-scale=1.0 ,maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+        <meta content="yes" name="apple-touch-fullscreen">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta content="fullscreen=yes,preventMove=no" name="ML-Config">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no; email=no">
+        <title>无标题文档</title>
+        <style>
+            body{overflow-X: hidden; font-size: 14px; }
+            p{margin:0; padding:0; line-height:23px !important}
+            div{margin:0; padding:0;}
+            table{ font-size:12px; width:100%;}
+        </style>
+
+
+
+        <div style="width:320px; margin:0 auto">
+            <p align="center"><strong style="font-size:30px; padding:5px; display:block;">贷款人披露信息</strong><strong> </strong><br>
+            </p><p align="left">
+            <strong>尊敬的客户：</strong><strong> </strong><br>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;感谢您向重庆小雨点小额贷款有限公司（下称</strong><strong>”</strong><strong>小雨点</strong><strong>”</strong><strong>）提交个人信用贷款申请，为了维护您的权益，请您特别留意以下信息披露：</strong><strong> </strong></p>
+            <p></p>
+            <br>
+            <strong style="font-size:16px;">小雨点公司基本信息</strong>
+            <br><br>
+            <p><strong>1、 </strong><strong>开业批复</strong><strong> </strong><br>
+                <img width="100%" src="/contracts/images/p1.png" align="left" hspace="12"><img width="100%" src="/contracts/images/p2.png">&nbsp; <br>
+                <strong>2、 </strong><strong>营业执照信息</strong><strong> </strong></p>
+            <p><img width="100%" src="/contracts/images/p3.png"></p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p><strong>&nbsp;</strong></p>
+
+            <div style="overflow:hidden; width:100%;"></div>
+
+
+            <p><strong>3、</strong><strong>联络地址（暂无分支机构）：</strong>重庆市渝北区红锦大道90号恒大中渝广场2栋26层 <br>
+                <strong>4、</strong><strong>联系电话：</strong>4000-188-299 </p>
+            <ol>
+                <li><strong>网络贷款信息：</strong><strong> </strong></li>
+            </ol>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;小雨点通过其自有互联网平台向全国范围内（不含港澳台地区）的个人客户提供小额信贷产品。客户通过网站或者手机仅需要3步即可办理借贷，无须前往营业网点提交申请，随时随地拍照上传资料。小雨点提供一站式网上贷款申请、审核和放款，7*24小时随时为您服务。 <br>
+                在严格遵守相关法律法规限制的前提下，小雨点根据产品和客户类型的不同提供差异化的综合利率、还本付息及计息方式，具体约定请务必仔细阅读借款合同及还款计划表，您也可以随时联络小雨点客户服务热线（4000-188-299）进行询问。 </p>
+            <ol>
+                <li><strong>其他信息：</strong><strong> </strong></li>
+            </ol>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;如果客户未能按照约定偿还任何款项，我们将采取相应措施予以处理，包括但不限于电话催收、发送催收函、委托具备相关资质的第三方进行催收、提起诉讼或采取其他合法的违约救济措施。 <br>
+                我们会严格按照有关贷款风险分类的法规要求，将贷款划分为正常、关注、次级、可疑和损失五个类别，以下贷款风险分类矩阵供您参考。需要提醒您注意的是，我们会根据贷款的实际情况酌情认定贷款风险分类，最终分类结果可能与下表有所不同。 </p>
+            <table border="1">
+                <tbody><tr>
+                    <td width="100%" valign="center" colspan="5">
+                        <div style="padding:20px;">逾期时间</div></td>
+                </tr>
+                <tr>
+                    <td width="104" valign="center"><p align="center">0至10天 </p></td>
+                    <td width="103" valign="center"><p align="center">11至90天 </p></td>
+                    <td width="122" valign="center"><p align="center">91至180天 </p></td>
+                    <td width="113" valign="center"><p align="center">181至360天 </p></td>
+                    <td width="131" valign="center"><p align="center">361天以上 </p></td>
+                </tr>
+                <tr>
+                    <td width="104" valign="center"><p align="center">正常 </p></td>
+                    <td width="103" valign="center"><p align="center">关注 </p></td>
+                    <td width="122" valign="center"><p align="center">次级 </p></td>
+                    <td width="113" valign="center"><p align="center">可疑 </p></td>
+                    <td width="131" valign="center"><p align="center">损失 </p></td>
+                </tr>
+                </tbody></table>
+            <p>此外，我们暂时没有接入人行征信系统。 <br>
+                如果您对我们的产品或是服务有任何意见、建议或是不满，欢迎拨打我们的客户服务热线（4000-188-299）进行反馈或投诉。 <br>
+                我们将根据公司情况对上述披露信息进行不时更新，如因客观原因导致延迟，敬请谅解。 <br>
+                再次感谢您选择小雨点！ <br>
+            </p><div style="text-align:right;font-weight:bold">重庆小雨点小额贷款有限公司</div>
+            <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong> <br>
+            <p></p>
+        </div>
+
+
+    </div>
+    <button class="close" type="button">关闭</button>
+</div>
+<input type="hidden" value="6ed1ae5a29cc3a780ab317230e782190" id="orderNo"/>
+<input type="hidden" value="3C" id="productNo"/>
+<input type="hidden" value="" id="sourceSites"/>
+<input type="hidden" value="马阿卜都" id="name" />
+<input type="hidden" value="13088734451"id="phone"/>
+<input type="hidden" value="622926199501091053" id="nationalId"/>
+<input type="hidden" value="2017SXS22037012211123483C" id="loanNumber"/>
+<input type="hidden" value="220370" id="accountId"/>
+<input type="hidden" value="http://www.asfenqi.com/aishangjinrong/white.html" id="redirectURL"/>
+<script src="../resources/js/jquery-2.2.3.min.js"></script>
+<script src="../resources/js/contract_aishang.js"></script>
+<div class="maskbox none">
+    <div class="box2">
+        正在签署
+    </div>
+    <div class="mask"></div>
+</div>
+
+<!-- iovation -->
+<!--<script type="text/javascript" src="../../../../mpsnare.iesnare.com/snare.js"></script>-->
+<!--<script type="text/javascript" src="../../../wdp-service/latest/static_wdp.js"></script>-->
+<!--<script type="text/javascript" src="../../../wdp-service/latest/dyn_wdp.js"></script>-->
+<!--<script src="../../../js/iovation.js"></script>-->
+</body>
+<!-- 确认签署弹出 【个人信用报告查询与上报授权书】 页面补丁 -->
+<script src="../resources/js/submitSignPopup.js"></script>
+</html>
